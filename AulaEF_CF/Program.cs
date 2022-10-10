@@ -3,6 +3,7 @@ using AulaEF_CF.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,12 +45,34 @@ namespace AulaEF_CF
                 else
                     Console.WriteLine("Registro não encontrado");
                 #endregion
+               
+                #region UPDATE 1
+                find.Mobile = "987";
+
+                context.Entry(find).State = EntityState.Modified;
+                context.Persons.AddOrUpdate(find);
+                context.SaveChanges();
+
+                Console.WriteLine(find.ToString());
+
+                Console.ReadKey();
+
+                #endregion
+
+                #region UPDATE 2
+                context.Entry(find).State = EntityState.Modified;
+                find.Name = "Livia";
+                context.SaveChanges();
+
+                Console.WriteLine(find.ToString());
+                Console.ReadKey();
+
+                #endregion
                 #region REMOVE
                 context.Entry(find).State = EntityState.Deleted;
                 context.Persons.Remove(find);
                 context.SaveChanges();
                 #endregion
-
                 Console.ReadKey();
             }
 
